@@ -6,9 +6,9 @@ Created on Sat Jun 15 07:28:17 2024
 """
 
 import os
-import haohaninfo
+#import haohaninfo
 #from order_Lo8 import Record
-#import numpy as np
+import numpy as np
 from talib.abstract import SMA,EMA, WMA, RSI, BBANDS, MACD
 import sys
 #import indicator_f_Lo2_short,datetime, indicator_forKBar_short
