@@ -115,7 +115,7 @@ Date = start_date.strftime("%Y-%m-%d")
 st.subheader("設定一根 K 棒的時間長度(分鐘)")
 cycle_duration = st.number_input('輸入一根 K 棒的時間長度(單位:分鐘, 一日=1440分鐘)', key="KBar_duration")
 cycle_duration = int(cycle_duration)
-#cycle_duration = 1440   ## 可以改成你想要的 KBar 週期
+cycle_duration = 1440   ## 可以改成你想要的 KBar 週期
 #KBar = indicator_f_Lo2.KBar(Date,'time',2)
 KBar = indicator_forKBar_short.KBar(Date,cycle_duration)    ## 設定cycle_duration可以改成你想要的 KBar 週期
 
