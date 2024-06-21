@@ -15,6 +15,7 @@ from plotly.subplots import make_subplots
 import streamlit as st
 import datetime
 
+
 html_temp = """
 <div style="background-color:#FFA500;padding:10px;border-radius:10px">
 <h1 style="color:white;text-align:center;">金融期末報告(聯電) </h1>
@@ -85,8 +86,14 @@ class KBar:
             self.TAKBar['close'][-1] = close_price
             self.TAKBar['volume'][-1] += volume
 
-st.subheader("設定一根 K 棒的時間長度(分鐘)")
-cycle_duration = st.number_input('輸入一根 K 棒的時間長度(單位:分鐘, 一日=1440分鐘)', value=1440)
+st.subheader("設定一根 K 棒的時間長度 (分鐘)")
+cycle_duration = st.number_input(
+    '輸入一根 K 棒的時間長度 (單位:分鐘, 一日=1440分鐘)', 
+    min_value=1, 
+    max_value=1440, 
+    value=1440
+)
+st.write(f"你設定的一根 K 棒的時間長度為: {cycle_duration} 分鐘")
 
 kbar = KBar(start_date, cycle_duration)
 for i in range(KBar_dic['time'].size):
@@ -107,9 +114,10 @@ KBar_df = pd.DataFrame(KBar_dic)
 
 ##### 移動平均線策略 #####
 st.subheader("設定計算長移動平均線(MA)的 K 棒數目(整數, 例如 10)")
-LongMAPeriod = st.slider('選擇一個整數', 0, 100, 10)
+LongMAPeriod = st.radio('選擇長移動平均線的 K 棒數目', options=range(0, 101), index=10)
+
 st.subheader("設定計算短移動平均線(MA)的 K 棒數目(整數, 例如 2)")
-ShortMAPeriod = st.slider('選擇一個整數', 0, 100, 2)
+ShortMAPeriod = st.radio('選擇短移動平均線的 K 棒數目', options=range(0, 101), index=2)
 
 KBar_df['MA_long'] = KBar_df['close'].rolling(window=LongMAPeriod).mean()
 KBar_df['MA_short'] = KBar_df['close'].rolling(window=ShortMAPeriod).mean()
