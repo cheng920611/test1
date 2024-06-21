@@ -137,7 +137,7 @@ def Calculate_Bollinger_Bands(df, period=20, num_std_dev=2):
 # Setting Bollinger Bands Parameters
 expander_bb_params = st.expander("設定布林通道(Bollinger Band)相關參數:")
 period = expander_bb_params.slider('設定計算布林通道(Bollinger Band)上中下三通道之K棒週期數目(整數, 例如 20)', 0, 100, 20, key='BB_period')
-num_std_dev = expander_bb_params.slider('設定計算布林通道(Bollinger Band)上中(或下中)通道之帶寬(例如 2 代表上中通道寬度為2倍的標準差)', 0, 100, 2, key='BB_he
+num_std_dev = expander_bb_params.slider('設定計算布林通道(Bollinger Band)上中(或下中)通道之帶寬(例如 2 代表上中通道寬度為2倍的標準差)', 0, 100, 2, key='BB_he')
 
 
 KBar_df = Calculate_Bollinger_Bands(KBar_df, period, num_std_dev)
