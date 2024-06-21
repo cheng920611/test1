@@ -12,27 +12,46 @@ import streamlit as st
 import streamlit.components.v1 as stc 
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import streamlit as st
+import datetime
 
-###### (1) 開始設定 ######
 html_temp = """
 <div style="background-color:#FFA500;padding:10px;border-radius:10px">
-<h1 style="color:white;text-align:center;">金融期末報告 </h1>
+<h1 style="color:white;text-align:center;">金融期末報告(聯電) </h1>
 <h2 style="color:white;text-align:center;">資科三B 411001241 周威丞 </h2>
 </div>
 """
 stc.html(html_temp)
 
-# Load data from a pickle file
-df_original = pd.read_pickle('kbars_2330_2022-01-01-2022-11-18.pkl')
+df_original = pd.read_excel("2303.xlsx")
+df_original.to_pickle('2303.pkl')
+df_original = pd.read_pickle('2303.pkl')
 df_original = df_original.drop('Unnamed: 0', axis=1)
 
 ##### 選擇資料區間 #####
-st.subheader("選擇開始與結束的日期, 區間:2022-01-03 至 2022-11-18")
-start_date = st.text_input('選擇開始日期 (日期格式: 2022-01-03)', '2022-01-03')
-end_date = st.text_input('選擇結束日期 (日期格式: 2022-11-18)', '2022-11-18')
-start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
-end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
+#st.subheader("選擇開始與結束的日期, 區間:2022-01-03 至 2022-11-18")
+#start_date = st.text_input('選擇開始日期 (日期格式: 2022-01-03)', '2022-01-03')
+#end_date = st.text_input('選擇結束日期 (日期格式: 2022-11-18)', '2022-11-18')
+#start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+#end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
+#df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
+
+
+# 確保 df_original 是你的原始資料數據框
+# df_original = ...
+
+st.subheader("選擇開始與結束的日期, 區間:2020-01-01 至 2024-06-20")
+
+
+start_date = st.date_input('選擇開始日期', value=datetime.date(2020, 1, 1), min_value=datetime.date(2020, 1, 1), max_value=datetime.date(2024, 6, 20))
+end_date = st.date_input('選擇結束日期', value=datetime.date(2024, 6, 20), min_value=datetime.date(2020, 1, 1), max_value=datetime.date(2022, 6, 20))
+start_date = datetime.datetime.combine(start_date, datetime.datetime.min.time())
+end_date = datetime.datetime.combine(end_date, datetime.datetime.min.time())
+
+# 過濾資料
 df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
+st.dataframe(df)
+
 
 ###### (2) 轉化為字典 ######
 KBar_dic = df.to_dict()
