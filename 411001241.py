@@ -114,10 +114,10 @@ KBar_df = pd.DataFrame(KBar_dic)
 
 ##### 移動平均線策略 #####
 st.subheader("設定計算長移動平均線(MA)的 K 棒數目(整數, 例如 10)")
-LongMAPeriod = st.selectbox('選擇長移動平均線的 K 棒數目', options=range(0, 101), index=10)
+LongMAPeriod = st.number_input('輸入長移動平均線的 K 棒數目', min_value=0, max_value=100, value=10)
 
 st.subheader("設定計算短移動平均線(MA)的 K 棒數目(整數, 例如 2)")
-ShortMAPeriod = st.selectbox('選擇短移動平均線的 K 棒數目', options=range(0, 101), index=2)
+ShortMAPeriod = st.number_input('輸入短移動平均線的 K 棒數目', min_value=0, max_value=100, value=2)
 
 KBar_df['MA_long'] = KBar_df['close'].rolling(window=LongMAPeriod).mean()
 KBar_df['MA_short'] = KBar_df['close'].rolling(window=ShortMAPeriod).mean()
