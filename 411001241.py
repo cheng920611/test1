@@ -44,7 +44,7 @@ st.subheader("選擇開始與結束的日期, 區間:2020-01-01 至 2024-06-20")
 
 
 start_date = st.date_input('選擇開始日期', value=datetime.date(2020, 1, 1), min_value=datetime.date(2020, 1, 1), max_value=datetime.date(2024, 6, 20))
-end_date = st.date_input('選擇結束日期', value=datetime.date(2024, 6, 20), min_value=datetime.date(2020, 1, 1), max_value=datetime.date(2022, 6, 20))
+end_date = st.date_input('選擇結束日期', value=datetime.date(2024, 6, 20), min_value=datetime.date(2020, 1, 1), max_value=datetime.date(2024, 6, 20))
 start_date = datetime.datetime.combine(start_date, datetime.datetime.min.time())
 end_date = datetime.datetime.combine(end_date, datetime.datetime.min.time())
 
